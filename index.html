@@ -118,6 +118,11 @@ section>h2{font:500 .78rem/1.4 var(--f-mono);text-transform:uppercase;letter-spa
   .tile-body,.tile.plain{padding:1rem}
 }
 
+/* justified running text on wider screens; captions, notes, headings, skill lists and phone-width columns stay left-aligned */
+@media (min-width:561px){
+  .hero .lede,.prose p,.tile-body>p:not(.note),.tile-body>ul:not(.chips) li,.tile.plain .outcome,.tl .v,.contact>p{text-align:justify;hyphens:auto;-webkit-hyphens:auto;text-wrap:pretty}
+}
+
 .pubs{list-style:none;margin:0;padding:0;display:grid;gap:1.4rem;max-width:44rem}
 .pubs li{display:grid;grid-template-columns:5.5rem minmax(0,1fr);gap:1rem}
 .pubs .yr{font:500 .85rem var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums;padding-top:.1rem}
