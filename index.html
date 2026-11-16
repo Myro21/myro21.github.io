@@ -153,6 +153,60 @@ footer{border-top:1px solid var(--rule);padding-block:1.75rem 2.5rem;font:400 .7
   section{grid-template-columns:1fr;padding-block:2.25rem}
   .pubs li,.tl li{grid-template-columns:1fr;gap:.2rem}
 }
+/* ---- glass layer: frosted translucent panels over soft warm light. Delete this block to return to the flat look. ---- */
+:root{
+  --glass:rgba(255,251,244,.44); --glass-strong:rgba(255,251,244,.64); --glass-edge:rgba(255,255,255,.8);
+  --hair:rgba(17,17,17,.13); --r-lg:22px; --r-md:14px;
+  --sheen:linear-gradient(135deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,.08) 38%,rgba(255,255,255,0) 62%,rgba(255,255,255,.22) 100%);
+  --lift:inset 0 1px 0 rgba(255,255,255,.85),inset 0 -1px 0 rgba(17,17,17,.04),0 14px 34px -16px rgba(70,38,8,.28),0 2px 6px -2px rgba(70,38,8,.10);
+  --blur:blur(20px) saturate(170%);
+}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:
+  radial-gradient(44rem 30rem at 88% -6%,rgba(224,100,15,.30),transparent 62%),
+  radial-gradient(38rem 30rem at -8% 34%,rgba(255,190,130,.50),transparent 62%),
+  radial-gradient(40rem 32rem at 100% 72%,rgba(184,71,10,.18),transparent 62%),
+  radial-gradient(34rem 26rem at 28% 108%,rgba(255,214,170,.55),transparent 62%)}
+section,footer{border-top-color:var(--hair)}
+section{scroll-margin-top:5.5rem}
+
+nav.top{margin-top:.75rem;padding:.6rem 1.25rem;border:1px solid var(--glass-edge)!important;border-radius:999px;
+  background:var(--sheen),var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);box-shadow:var(--lift)}
+@media (min-width:761px){nav.top{position:sticky;top:.75rem;z-index:20}}
+@media (max-width:760px){nav.top{border-radius:var(--r-lg);padding:.75rem 1rem}}
+
+.tile,.highlights,.email{background:var(--sheen),var(--glass);border:1px solid var(--glass-edge);
+  -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);box-shadow:var(--lift)}
+.tile{border-radius:var(--r-lg);transition:background-color .25s ease,box-shadow .25s ease}
+.tile:not(.plain):hover{background:var(--sheen),var(--glass-strong)}
+.tile>summary{border-radius:var(--r-lg)}
+.tile[open]>summary{border-bottom-color:var(--hair);border-radius:var(--r-lg) var(--r-lg) 0 0}
+.highlights{border-radius:var(--r-md);padding:.85rem 1.1rem;border-left:1px solid var(--glass-edge)}
+.highlights b{color:var(--accent)}
+.email{border-radius:999px;padding:.45rem .5rem .45rem 1.1rem;justify-self:start;max-width:100%}
+
+.tile .more,button.copy,.hero .links a{border-radius:999px;border:1px solid rgba(184,71,10,.32);background:rgba(255,255,255,.5);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 1px 3px rgba(70,38,8,.14);transition:background-color .2s ease,color .2s ease}
+.tile .more{padding:.3rem .8rem}
+button.copy{padding:.38rem .9rem}
+.hero .links{gap:.55rem .5rem}
+.hero .links a{padding:.42rem .8rem;font-size:.85rem;text-decoration:none}
+.hero .links a:hover,.tile>summary:hover .more,button.copy:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.hero .links a[href="#contact"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.hero .links a[href="#contact"]:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.chips li{border-radius:999px;padding:.22rem .7rem;background:rgba(17,17,17,.86)}
+
+.hero-photo img,.photos img,.video .frame{border-radius:var(--r-lg);box-shadow:0 18px 44px -20px rgba(70,38,8,.42),0 0 0 1px rgba(255,255,255,.55)}
+.shot img{border-radius:var(--r-md);border-color:var(--hair)}
+.note{border-left-color:rgba(184,71,10,.55)}
+
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  nav.top,.tile,.highlights,.email{background:var(--surface)}
+}
+@media (prefers-reduced-transparency:reduce){
+  nav.top,.tile,.highlights,.email{background:var(--surface);-webkit-backdrop-filter:none;backdrop-filter:none}
+}
+@media print{body::before{display:none}nav.top{position:static}}
+
 @media (prefers-reduced-motion:no-preference){
   .wire-fb{animation:flow 1.6s linear infinite}
   @keyframes flow{to{stroke-dashoffset:-18}}
